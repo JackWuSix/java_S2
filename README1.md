@@ -1,24 +1,22 @@
 from datetime import datetime, timedelta
 
-def check_absent_covered(leave_ranges, trip_ranges, absent_range):
+def check_absent_covered(time_ranges, absent_range):
     """
-    判断请假时间 + 出差时间是否完全覆盖缺勤时间段
-    并返回覆盖状态及未覆盖小时数
+    判断一组时间段是否完全覆盖缺勤时间段，并返回覆盖状态及未覆盖小时数
 
-    :param leave_ranges: list[tuple(str, str)] 请假时间段，例如 [("2025-01-01 09:00:00", "2025-01-01 12:00:00")]
-    :param trip_ranges: list[tuple(str, str)] 出差时间段，例如 [("2025-01-01 13:00:00", "2025-01-01 21:00:00")]
-    :param absent_range: tuple(str, str) 缺勤时间段，例如 ("2025-01-01 09:00:00", "2025-01-01 21:00:00")
+    :param time_ranges: list[tuple(str, str)] 时间段集合，例如：
+        [("2025-01-01 09:00:00", "2025-01-01 12:00:00"), ("2025-01-01 14:00:00", "2025-01-01 21:00:00")]
+    :param absent_range: tuple(str, str) 缺勤时间段，例如：
+        ("2025-01-01 09:00:00", "2025-01-01 21:00:00")
     :return: dict 包含是否完全覆盖、覆盖小时数、未覆盖小时数
     """
     fmt = "%Y-%m-%d %H:%M:%S"
 
-    # 合并请假 + 出差的时间段
-    all_ranges = (leave_ranges or []) + (trip_ranges or [])
-
-    # 转为 datetime
-    ranges = [(datetime.strptime(s, fmt), datetime.strptime(e, fmt)) for s, e in all_ranges]
+    # 转换为 datetime 对象
+    ranges = [(datetime.strptime(s, fmt), datetime.strptime(e, fmt)) for s, e in (time_ranges or [])]
     absent_start, absent_end = datetime.strptime(absent_range[0], fmt), datetime.strptime(absent_range[1], fmt)
 
+    # 若无任何时间段，直接返回全缺勤
     if not ranges:
         total_absent = (absent_end - absent_start).total_seconds() / 3600
         return {"is_covered": False, "covered_hours": 0, "uncovered_hours": round(total_absent, 2)}
@@ -26,14 +24,14 @@ def check_absent_covered(leave_ranges, trip_ranges, absent_range):
     # 按开始时间排序
     ranges.sort(key=lambda x: x[0])
 
-    # 合并重叠或相邻的时间段
+    # 合并重叠或相邻时间段
     merged = []
     for start, end in ranges:
         if not merged:
             merged.append([start, end])
         else:
             last_start, last_end = merged[-1]
-            if start <= last_end:  # 重叠或相邻
+            if start <= last_end:  # 有重叠或相邻
                 merged[-1][1] = max(last_end, end)
             else:
                 merged.append([start, end])
@@ -60,20 +58,24 @@ def check_absent_covered(leave_ranges, trip_ranges, absent_range):
 
 # ✅ 示例调用
 if __name__ == "__main__":
+    # 三个不同来源的集合
     leave_list = [
-        ("2025-01-01 20:00:00", "2025-01-01 23:00:00"),
-        ("2025-01-01 22:00:00", "2025-01-02 09:59:00"),
-    ]
-    trip_list = [
-        ("2025-01-01 17:00:00", "2025-01-01 21:00:00"),
+        ("2025-01-01 09:00:00", "2025-01-01 12:00:00"),
     ]
 
-    absent = ("2025-01-01 21:00:00", "2025-01-02 09:00:00")
-    # is_covered
-    # 是否完全覆盖缺勤时间
-    # covered_hours
-    # 被请假或出差覆盖的小时数
-    # uncovered_hours
-    # 实际未覆盖的缺勤小时数
-    result = check_absent_covered(leave_list, trip_list, absent)
+    trip_list = [
+        ("2025-01-01 14:00:00", "2025-01-01 18:00:00"),
+    ]
+
+    outside_list = [
+        ("2025-01-01 18:00:00", "2025-01-01 21:00:00"),
+    ]
+
+    # ✅ 合并成一个总集合
+    all_time_ranges = leave_list + trip_list + outside_list
+
+    # 缺勤区间
+    absent = ("2025-01-09 09:00:00", "2025-01-09 21:00:00")
+
+    result = check_absent_covered(all_time_ranges, absent)
     print(result)
