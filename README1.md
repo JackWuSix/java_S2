@@ -1,25 +1,28 @@
 yangtze@ERP-Yangtze-Test:~/yangtze-bench/apps/yangtze$ git status 
 interactive rebase in progress; onto 47be125
-Last commands done (7 commands done):
-   pick 7b55be8 休假工作流--工伤假期流程完成
-   pick 3b86097 完成请求其他类型流程开发
-  (see more in file .git/rebase-merge/done)
-Next commands to do (24 remaining commands):
+Last commands done (9 commands done):
    pick b5352a0 初始化考勤申请工作流代码
    pick 5d0aea7 撤销考勤工作流，增加加班申请工作流
+  (see more in file .git/rebase-merge/done)
+Next commands to do (22 remaining commands):
+   pick c2229e7 初始化考勤流程
+   pick 3b43c46 调整格式，无修改
   (use "git rebase --edit-todo" to view and edit)
 You are currently rebasing branch 'beumer-upgrade' on '47be125'.
-  (fix conflicts and then run "git rebase --continue")
-  (use "git rebase --skip" to skip this patch)
-  (use "git rebase --abort" to check out the original branch)
+  (all conflicts fixed: run "git rebase --continue")
 
 Changes to be committed:
   (use "git restore --staged <file>..." to unstage)
+        modified:   yangtze/model/db_query.py
         modified:   yangtze/model/workflow.py
 
-Unmerged paths:
-  (use "git restore --staged <file>..." to unstage)
-  (use "git add <file>..." to mark resolution)
-        both modified:   yangtze/model/db_query.py
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   yangtze/model/db_query.py
 
+yangtze@ERP-Yangtze-Test:~/yangtze-bench/apps/yangtze$ git diff --name-only --diff-filter=U | xargs git checkout --theirs
+fatal: '--ours/--theirs' cannot be used with switching branches
+yangtze@ERP-Yangtze-Test:~/yangtze-bench/apps/yangtze$ git diff --name-only --diff-filter=U | xargs git checkout --ours 
+fatal: '--ours/--theirs' cannot be used with switching branches
 yangtze@ERP-Yangtze-Test:~/yangtze-bench/apps/yangtze$ 
