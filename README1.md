@@ -1,5 +1,1 @@
-[Could not find artifact com.zili.1chego.system:system-api:pom:0.1.12 in maven-public (http://192.168.112.244:8081/repository/maven-public/)
-Could not find artifact com.zili.1chego.system:system-api:pom:0.1.12 in maven-public (http://192.168.112.244:8081/repository/maven-public/)
-Could not find artifact com.zili.1chego.system:system-api:pom:0.1.12 in maven-public (http://192.168.112.244:8081/repository/maven-public/)
-Could not find artifact com.zili.1chego.system:system-api:pom:0.1.12 in maven-public (http://192.168.112.244:8081/repository/maven-public/)
-](https://home.firefoxchina.cn/)
+[ERROR] Failed to execute goal on project system-service: Could not resolve dependencies for project com.zili.1chego.system:system-service:jar:5.2.27: Failed to collect dependencies at com.zili.1chego.data:data-api:jar:0.0.2: Failed to read artifact descriptor for com.zili.1chego.data:data-api:jar:0.0.2: The following artifacts could not be resolved: com.zili.1chego.data:data:pom:0.0.1-SNAPSHOT (absent): com.zili.1chego.data:data:pom:0.0.1-SNAPSHOT was not found in http://192.168.112.244:8081/repository/maven-public/ during a previous attempt. This failure was cached in the local repository and resolution is not reattempted until the update interval of maven-public has elapsed or updates are forced -> [Help 1]但是我本地仓库有这个0.02的包
