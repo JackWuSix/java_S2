@@ -1,1 +1,1 @@
-mvn clean install -pl data-api -am
+[ERROR] Failed to execute goal on project pay-service: Could not resolve dependencies for project com.zili.1chego.pay:pay-service:jar:5.2.3: The following artifacts could not be resolved: com.nbcb:openBasicSDK:jar:1.7.9.1 (absent): com.nbcb:openBasicSDK:jar:1.7.9.1 was not found in http://192.168.112.244:8081/repository/maven-public/ during a previous attempt. This failure was cached in the local repository and resolution is not reattempted until the update interval of maven-public has elapsed or updates are forced -> [Help 1]
