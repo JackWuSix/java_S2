@@ -1,2 +1,1 @@
-openBasicSDK-1.7.9.1.jar.lastUpdated
-openBasicSDK-1.7.9.1.pom.lastUpdated
+Could not find artifact com.fadada:fadada:pom:1.8.21 in maven-public (http://192.168.112.244:8081/repository/maven-public/)
