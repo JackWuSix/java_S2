@@ -1,22 +1,15 @@
--Xms16384m
--Xmx16384m
--XX:ReservedCodeCacheSize=4096m
--XX:+IgnoreUnrecognizedVMOptions
--XX:+UseG1GC
--XX:SoftRefLRUPolicyMSPerMB=50
--XX:CICompilerCount=2
--XX:+HeapDumpOnOutOfMemoryError
--XX:-OmitStackTraceInFastThrow
--ea
--Dsun.io.useCanonCaches=false
--Djdk.http.auth.tunneling.disabledSchemes=""
--Djdk.attach.allowAttachSelf=true
--Djdk.module.illegalAccess.silent=true
--Dkotlinx.coroutines.debug=off
--XX:ErrorFile=$USER_HOME/java_error_in_idea_%p.log
--XX:HeapDumpPath=$USER_HOME/java_error_in_idea.hprof
+<html>
 
---add-opens=java.base/jdk.internal.org.objectweb.asm=ALL-UNNAMED
---add-opens=java.base/jdk.internal.org.objectweb.asm.tree=ALL-UNNAMED
+<head>
+	<title>504 Gateway Time-out</title>
+</head>
 
--javaagent:C:\jetbra\ja-netfilter.jar=jetbrains
+<body>
+	<center>
+		<h1>504 Gateway Time-out</h1>
+	</center>
+	<hr>
+	<center>nginx/1.24.0 (Ubuntu)</center>
+</body>
+
+</html>
